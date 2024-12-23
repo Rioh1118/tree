@@ -68,12 +68,73 @@ public class Bst<K extends Comparable<K>, V> implements Tree<K, V> {
     }
   }
 
+
+  private void replaceChild(Node<K, V> parent, Node<K, V> target, Node<K, V> replacement) {
+    if (parent == null) {
+      // 親が null の場合は root を更新
+      this.root = replacement;
+    } else if (parent.getLeft() == target) {
+      parent.setLeft(replacement);
+    } else if (parent.getRight() == target) {
+      parent.setRight(replacement);
+    }
+  }
+
   @Override
   public boolean delete(K key) {
     // :TODO ここに削除処理を実装してください
+    Node<K, V> parent = null;
+    Node<K, V> target = this.root;
 
-    return false;
+    while (target != null && !target.getKey().equals(key)) {
+      parent = target;
+      if (target.getKey().compareTo(key) > 0) {
+        target = target.getLeft();
+      } else {
+        target = target.getRight();
+      }
+    }
+
+    // 削除対象が見つからなかった場合
+    if (target == null) {
+      return false;
+    }
+
+    // 削除処理
+    if (target.getLeft() == null && target.getRight() == null) {
+      // ケース1: 葉ノード
+      replaceChild(parent, target, null);
+    } else if (target.getLeft() == null || target.getRight() == null) {
+      // ケース2: 子ノードが1つ
+      Node<K, V> child = (target.getLeft() != null) ? target.getLeft() : target.getRight();
+      replaceChild(parent, target, child);
+    } else {
+      // ケース3: 子ノードが2つ
+      Node<K, V> successorParent = target;
+      Node<K, V> successor = target.getRight();
+
+      // 右部分木の最小値を探す
+      while (successor.getLeft() != null) {
+        successorParent = successor;
+        successor = successor.getLeft();
+      }
+
+      // 後継ノードを削除対象ノードに置き換える
+      target.setKey(successor.getKey());
+      target.setValue(successor.getValue());
+
+      // 後継ノードを削除
+      if (successorParent.getLeft() == successor) {
+        successorParent.setLeft(successor.getRight());
+      } else {
+        successorParent.setRight(successor.getRight());
+      }
+    }
+
+    return true;
   }
+
+
 
   @Override
   public Optional<V> search(K key) {
@@ -99,13 +160,13 @@ public class Bst<K extends Comparable<K>, V> implements Tree<K, V> {
       return searchNode(cur.getRight(), key);
     }
 
-
   }
 
 
   @Override
   public int size() {
     // :TODO ここにサイズ取得処理を実装してください
+
     return 0;
   }
 
