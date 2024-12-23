@@ -1,4 +1,4 @@
-package com.github.rioh1118.binary;
+package com.github.rioh1118.bst;
 
 class Node<K, V> {
   private K key;
