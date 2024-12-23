@@ -1,8 +1,8 @@
-import com.github.rioh1118.bst.BST;
+import com.github.rioh1118.bst.Bst;
 
 public class App {
     public static void main(String[] args) throws Exception {
-        BST<Integer, String> tree = new BST<>();
+        Bst<Integer, String> tree = new Bst<>();
 
     }
 }

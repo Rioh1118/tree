@@ -3,14 +3,14 @@ package com.github.rioh1118.bst;
 import com.github.rioh1118.Tree;
 import java.util.Optional;
 
-public class BST<K extends Comparable<K>, V> implements Tree<K, V> {
+public class Bst<K extends Comparable<K>, V> implements Tree<K, V> {
   private Node<K, V> root;
 
-  public BST() {
+  public Bst() {
     this.root = null;
   }
 
-  public BST(K key, V value) {
+  public Bst(K key, V value) {
     this.root = new Node<>(key, value);
   }
 
