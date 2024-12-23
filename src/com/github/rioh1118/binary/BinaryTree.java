@@ -3,12 +3,21 @@ package com.github.rioh1118.binary;
 import com.github.rioh1118.Tree;
 import java.util.Optional;
 
-public class BinaryTree<K, V> implements Tree<K, V> {
+public class BinaryTree<K extends Comparable<K>, V> implements Tree<K, V> {
   private Node<K, V> root;
+
+  public BinaryTree() {
+    this.root = null;
+  }
+
+  public BinaryTree(K key, V value) {
+    this.root = new Node<>(key, value);
+  }
 
   @Override
   public boolean insert(V value) {
     // :TODO ここに挿入処理を実装してください
+
     return false;
   }
 
