@@ -2,7 +2,7 @@ package com.github.rioh1118;
 
 import java.util.Optional;
 
-public interface Tree<K, V> {
+public interface Tree<K extends Comparable<K>, V> {
 
   boolean insert(K key, V value);
 
