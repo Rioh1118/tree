@@ -71,14 +71,37 @@ public class Bst<K extends Comparable<K>, V> implements Tree<K, V> {
   @Override
   public boolean delete(K key) {
     // :TODO ここに削除処理を実装してください
+
     return false;
   }
 
   @Override
   public Optional<V> search(K key) {
     // :TODO ここに検索処理を実装してください
-    return Optional.empty();
+    Node<K, V> node = searchNode(this.root, key);
+
+    if (node == null) {
+      return Optional.empty();
+    }
+
+    return Optional.of(node.getValue());
   }
+
+  private Node<K, V> searchNode(Node<K, V> cur, K key) {
+
+    if (cur == null) {
+      return null;
+    } else if (cur.getKey().compareTo(key) == 0) {
+      return cur;
+    } else if (cur.getKey().compareTo(key) > 0) {
+      return searchNode(cur.getLeft(), key);
+    } else {
+      return searchNode(cur.getRight(), key);
+    }
+
+
+  }
+
 
   @Override
   public int size() {
