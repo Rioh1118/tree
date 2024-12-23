@@ -17,19 +17,34 @@ public class Bst<K extends Comparable<K>, V> implements Tree<K, V> {
   @Override
   public boolean insert(K key, V value) {
     // :TODO ここに挿入処理を実装してください
-    if (this.root == null) {
-      root = new Node<>(key, value);
+    try {
+      if (this.root == null) {
+        root = new Node<>(key, value);
+      }
+      // 挿入するノードが根ノードよりも小さい場合
+      else if (this.root.getKey().compareTo(key) > 0) {
+        if (this.root.getLeft() == null) {
+          this.root.setLeft(new Node<>(key, value));
+        }
+        insertNode(this.root.getLeft(), key, value);
+      }
+      // 挿入するノードが根ノードよりも大きい場合
+      else if (this.root.getKey().compareTo(key) < 0) {
+        if (this.root.getRight() == null) {
+          this.root.setRight(new Node<>(key, value));
+        }
+        insertNode(this.root.getRight(), key, value);
+      } else {
+        throw new Error("Key is already exists.");
+      }
+
+      return true;
+    } catch (Error e) {
+      return false;
     }
-
-
-
-    // 挿入するノードが根ノードよりも小さい場合
-    if (root.getKey().compareTo(key) > 0) {
-    }
-
-    return false;
   }
 
+  // insertメソッドの補助メソッド
   private void insertNode(Node<K, V> cur, K key, V value) throws Error {
     // 挿入するノードが現在のノードよりも小さい場合
     if (cur.getKey().compareTo(key) > 0) {
