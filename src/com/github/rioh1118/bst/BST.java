@@ -92,4 +92,25 @@ public class Bst<K extends Comparable<K>, V> implements Tree<K, V> {
     return false;
   }
 
+  // 二分探索木を表示する
+  public void printTree() {
+    printSubtree(root, 0);
+  }
+
+  // 再帰的に部分木を表示する (内部用)
+  private void printSubtree(Node<K, V> node, int depth) {
+    if (node == null) {
+      return;
+    }
+
+    // 右部分木を処理
+    printSubtree(node.getRight(), depth + 1);
+
+    // インデントを調整して現在のノードを表示
+    System.out.println("  ".repeat(depth) + node.getKey() + ": " + node.getValue());
+
+    // 左部分木を処理
+    printSubtree(node.getLeft(), depth + 1);
+  }
+
 }
