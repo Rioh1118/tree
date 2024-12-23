@@ -4,7 +4,7 @@ import java.util.Optional;
 
 public interface Tree<K, V> {
 
-  boolean insert(V value);
+  boolean insert(K key, V value);
 
   boolean delete(K key);
 

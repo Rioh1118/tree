@@ -1,22 +1,26 @@
-package com.github.rioh1118.binary;
+package com.github.rioh1118.bst;
 
 import com.github.rioh1118.Tree;
 import java.util.Optional;
 
-public class BinaryTree<K extends Comparable<K>, V> implements Tree<K, V> {
+public class BST<K extends Comparable<K>, V> implements Tree<K, V> {
   private Node<K, V> root;
 
-  public BinaryTree() {
+  public BST() {
     this.root = null;
   }
 
-  public BinaryTree(K key, V value) {
+  public BST(K key, V value) {
     this.root = new Node<>(key, value);
   }
 
   @Override
-  public boolean insert(V value) {
+  public boolean insert(K key, V value) {
     // :TODO ここに挿入処理を実装してください
+    if (root == null) {
+      root = new Node<>(key, value);
+    }
+
 
     return false;
   }
